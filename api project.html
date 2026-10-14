@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random User API</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 280px;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #007bff;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            margin: 5px 0;
+            color: #333;
+        }
+
+        p {
+            margin: 5px 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <img id="userimg">
+        <h3 id="username">Click button to load</h3>
+        <p id="useremail">Email example.com</p>
+        <p id="usergender">Gender</p>
+        <p id="usercity">City</p>
+        <button onclick="getuser()">Get New User</button>
+
+    </div>
+
+    <script>
+        async function getuser() {
+            document.getElementById('username').innerText = "Loading...";
+            try {
+                let response = await fetch('https://randomuser.me/api/');
+                let data = await response.json();
+                let user = data.results[0];
+                document.getElementById('userimg').src = user.picture.medium;
+                document.getElementById('username').innerText =`${user.name.first} ${user.name.last}`;
+                document.getElementById('useremail').innerText = `Email: ${user.email}`;
+                document.getElementById('usergender').innerText =`Gender: ${user.gender}`;
+                document.getElementById('usercity').innerText =`City: ${user.location.city}`;
+
+            } catch (error) {
+
+                document.getElementById('username').innerText ="Error loading user!";
+
+            }
+        }
+    </script>
+
+</body>
+</html>
+    
+</body>
+</html>
